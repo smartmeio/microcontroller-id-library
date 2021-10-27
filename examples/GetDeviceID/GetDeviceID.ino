@@ -19,7 +19,7 @@
 */
 
 /*
-  The library will use Microcontroller's built in method to retrieve his unique ID. This will be 0 padded until size is given size is met.
+  The library will use Microcontroller's built in method to retrieve his unique ID. This will be 0 padded until given size is met.
   Keep in mind that when calling the string method, the buffer should be at least double+1 of ID size. If a size will not provided as argument,
   only the bare minimum string will be returned.
 */
