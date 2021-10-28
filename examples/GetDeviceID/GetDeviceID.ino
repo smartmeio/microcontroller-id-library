@@ -25,7 +25,9 @@
 */
 
 #include <MicrocontrollerID.h>
-
+#if defined(ARDUINO_ARCH_NRF52)
+#include #include <Adafruit_TinyUSB.h>
+#endif
 void setup() {
   Serial.begin(115200);
   while (!Serial);
