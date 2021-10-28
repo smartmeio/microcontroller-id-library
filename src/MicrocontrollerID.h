@@ -66,6 +66,9 @@ https://github.com/ricaun/ArduinoUniqueID
 #elif defined (ARDUINO_ARCH_SAMD)
 #define IDSIZE 16
 
+#elif defined(ARDUINO_ARCH_STM32)
+#define IDSIZE 12
+
 #endif
 
 

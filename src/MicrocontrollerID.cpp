@@ -106,18 +106,27 @@ void MicrocontrollerID::getUniqueID(uint8_t* id_out, int size){
 	}
 
 #elif defined(ARDUINO_ARCH_STM32)
-    uint32_t _id[3];
-	_id[0] = HAL_GetUIDw0();
-	_id[1] = HAL_GetUIDw1();
-	_id[2] = HAL_GetUIDw2();
-    for (int i = 0; i < 3; i++)
+	#if defined (ARDUINO_ARANCINOV12_H743ZI2)
+		#define UID_BASE       (0x1FF1E800)    /*!< Unique device ID register base address for H743 */
+		uint32_t _id[3];
+		
+		_id[0] =  (uint32_t)(READ_REG(*((uint32_t *)UID_BASE ))) ;
+		_id[1] =  (uint32_t)(READ_REG(*((uint32_t *)(UID_BASE + 4U)))) ;
+		_id[2] =  (uint32_t)(READ_REG(*((uint32_t *)(UID_BASE + 8U)))) ;
+		
+	#else
+		_id[0] = HAL_GetUIDw0();
+		_id[1] = HAL_GetUIDw1();
+		_id[2] = HAL_GetUIDw2();
+    
+	#endif
+	for (int i = 0; i < 3; i++)
 	{
 		id_out[i*4+0] = (uint8_t)(_id[i] >> 24);
 		id_out[i*4+1] = (uint8_t)(_id[i] >> 16);
 		id_out[i*4+2] = (uint8_t)(_id[i] >> 8);
 		id_out[i*4+3] = (uint8_t)(_id[i] >> 0);
 	}
-
 #endif
 
     _zeroPad(id_out, IDSIZE, size);
