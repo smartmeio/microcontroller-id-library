@@ -26,8 +26,6 @@
 
 #include <MicrocontrollerID.h>
 
-#define Serial SerialUSB
-
 void setup() {
   Serial.begin(115200);
   while (!Serial);
