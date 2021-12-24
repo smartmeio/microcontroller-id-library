@@ -25,9 +25,9 @@
 */
 
 #include <MicrocontrollerID.h>
-#if defined(ARDUINO_ARCH_NRF52)
-#include <Adafruit_TinyUSB.h>
-#endif
+
+#define Serial SerialUSB
+
 void setup() {
   Serial.begin(115200);
   while (!Serial);
@@ -41,7 +41,7 @@ void setup() {
   }
   Serial.println();
   
-  char id [40];
+  char id [41];
   MicroID.getUniqueIDString(id);
   Serial.print("Device ID (string): ");
   Serial.println(id);

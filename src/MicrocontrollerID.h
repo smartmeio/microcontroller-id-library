@@ -35,6 +35,10 @@ https://github.com/ricaun/ArduinoUniqueID
 #include <pico/unique_id.h>
 #endif
 
+#if defined(ARDUINO_ARCH_NRF52)
+#include <Adafruit_TinyUSB.h>
+#endif
+
 #if defined(ARDUINO_ARCH_AVR)
 #include <avr/boot.h>
 #ifndef SIGRD
