@@ -32,11 +32,14 @@ https://github.com/ricaun/ArduinoUniqueID
 #endif
 
 #if defined(ARDUINO_ARCH_RP2040)
-#include <pico/unique_id.h>
-#endif
-
-#if defined(ARDUINO_ARCH_NRF52)
-#include <Adafruit_TinyUSB.h>
+  #if defined(ARDUINO_ARCH_MBED)
+    extern "C" {
+    #include "hardware/flash.h"
+    #include "pico/bootrom.h"
+    }
+  #else
+    #include <pico/unique_id.h>
+  #endif
 #endif
 
 #if defined(ARDUINO_ARCH_AVR)
