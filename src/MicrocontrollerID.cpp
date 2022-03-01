@@ -11,11 +11,15 @@ void MicrocontrollerID::getUniqueID(uint8_t* id_out, int size){
 	}
 
 #if defined(ARDUINO_ARCH_RP2040)
-    pico_unique_board_id_t pico;
-  	pico_get_unique_board_id(&pico);
+  #if defined(ARDUINO_ARCH_MBED)
+  flash_get_unique_id((uint8_t*) id_out);
+  #else
+  pico_unique_board_id_t pico;
+  pico_get_unique_board_id(&pico);
 	for (int i = 0; i < IDSIZE; i++) {
 		id_out[i] = pico.id[i];
 	}
+	#endif
 
 #elif defined(ARDUINO_ARCH_AVR)
     for (int i = 0; i < IDSIZE; i++) {
