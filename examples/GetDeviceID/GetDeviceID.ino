@@ -45,7 +45,7 @@ void setup() {
   Serial.println(id);
 
   MicroID.getUniqueIDString(id, 20);
-  Serial.print("Device ID (fixed-lenght string): ");
+  Serial.print("Device ID (fixed-length string): ");
   Serial.println(id);
 }
 
